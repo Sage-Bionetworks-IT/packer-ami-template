@@ -13,6 +13,9 @@
           "volume_type": "gp3"
         }
       ],
+      "assume_role": {
+        "role_arn": "{{user `AwsRoleArn`}}"
+      },
       "profile": "{{user `AwsProfile`}}",
       "region": "{{user `AwsRegion`}}",
       "snapshot_groups": "{{user `SnapshotGroups`}}",
