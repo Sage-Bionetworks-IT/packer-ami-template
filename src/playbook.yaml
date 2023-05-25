@@ -1,12 +1,16 @@
-- hosts: all
-  become: yes
+- name: Main
+  hosts: all
+  become: true
 
   tasks:
-    - name: install system packages
-      shell: "yes | aptdcon --hide-terminal --install 'build-essential'"
+    - name: Install packages
+      ansible.builtin.apt:
+        state: present
+        update_cache: true
+        pkg:
+          - "build-essential"
 
-    - name: install python packages
-      pip:
+    - name: Install python packages
+      ansible.builtin.pip:
         name:
           - synapseclient
-        executable: pip3
