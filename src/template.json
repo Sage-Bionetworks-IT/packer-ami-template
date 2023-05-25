@@ -10,20 +10,28 @@
           "delete_on_termination": true,
           "device_name": "/dev/sda1",
           "volume_size": "{{user `VolumeSize`}}",
-          "volume_type": "gp2"
+          "volume_type": "gp3"
         }
       ],
       "profile": "{{user `AwsProfile`}}",
       "region": "{{user `AwsRegion`}}",
       "snapshot_groups": "{{user `SnapshotGroups`}}",
-      "source_ami": "{{user `SourceImage`}}",
+      "source_ami_filter": {
+        "filters": {
+          "name": "ubuntu/images/*ubuntu-jammy-22.04-amd64-server-*",
+          "root-device-type": "ebs",
+          "virtualization-type": "hvm"
+        },
+        "most_recent": true,
+        "owners": [
+          "099720109477"
+        ]
+      },
       "ssh_username": "{{user `SshUsername`}}",
       "tags": {
         "BuiltBy": "Packer",
-        "Department": "{{user `Department`}}",
         "Name": "{{user `ImageName`}}",
         "OwnerEmail": "{{user `OwnerEmail`}}",
-        "Project": "{{user `Project`}}",
         "SourceAmiId": "{{ .SourceAMI }}",
         "SourceAmiName": "{{ .SourceAMIName }}"
       },
@@ -51,14 +59,11 @@
   ],
   "variables": {
     "AmiGroups": "all",
-    "Department": "Platform",
     "ImageName": "{{env `ImageName`}}",
     "InstanceType": "t3.nano",
     "OwnerEmail": "it@sagebase.org",
-    "Project": "Infrastructure",
     "SnapshotGroups": "all",
-    "SourceImage": "ami-09ddd854571a732be",
     "SshUsername": "ubuntu",
-    "VolumeSize": "8"
+    "VolumeSize": "16"
   }
 }
