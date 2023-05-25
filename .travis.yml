@@ -14,7 +14,7 @@ install:
   - sudo apt-get update && sudo apt-get install packer
   # install awscli v2
   - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"
-  - unzip /tmp/awscliv2.zip -d /tmp/awscliv2 && sudo /tmp/awscliv2/install
+  - unzip /tmp/awscliv2.zip -d /tmp/awscliv2 && sudo /tmp/awscliv2/aws/install
   # install other tools
   - pip install pre-commit travis-wait-improved ansible
 before_script:
