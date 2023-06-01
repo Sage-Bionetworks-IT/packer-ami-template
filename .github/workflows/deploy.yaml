@@ -24,8 +24,6 @@ jobs:
       - name: packer validate
         run: |
           pushd src
-          echo "${{ github.event.repository.name }}"
-          echo "${{ github.ref_name }}"
           packer validate -var ImageName=validate template.json
   deploy:
     name: Deploy to AWS org-sagebase-imagecentral
@@ -55,4 +53,7 @@ jobs:
     - name: Build and Upload AMI
       run: |
         pushd src
+        echo "${{ env.AWS_REGION }}"
+        echo "${{ env.AWS_ROLE_TO_ASSUME }}"
+        echo "${{ github.event.repository.name }}-${{ github.ref_name }}"
         packer build -force -var AwsRoleArn=${{ env.AWS_ROLE_TO_ASSUME }} -var AwsRegion=${{ env.AWS_REGION }} -var ImageName=${{ github.event.repository.name }}-${{ github.ref_name }} template.json
