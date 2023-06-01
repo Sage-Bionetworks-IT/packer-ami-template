@@ -25,7 +25,9 @@ jobs:
       - name: packer validate
         run: |
           pushd src
-          packer validate -var ImageName=${{ github.event.repository.name }}-${{ github.ref_name }}} template.json
+          echo "${{ github.event.repository.name }}"
+          echo "${{ github.ref_name }}"
+          packer validate -var ImageName=${{ github.event.repository.name }}-${{ github.ref_name }} template.json
   deploy:
     name: Deploy to AWS org-sagebase-imagecentral
     runs-on: ubuntu-latest
