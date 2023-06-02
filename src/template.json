@@ -3,7 +3,7 @@
     {
       "access_key": "{{user `aws_access_key`}}",
       "ami_groups": "{{user `AmiGroups`}}",
-      "ami_name": "{{user `ImageName`}}",
+      "ami_name": "{{user `AmiImageName`}}",
       "assume_role": {
         "role_arn": "{{user `aws_role_arn`}}"
       },
@@ -35,7 +35,7 @@
       "ssh_username": "{{user `SshUsername`}}",
       "tags": {
         "BuiltBy": "Packer",
-        "Name": "{{user `ImageName`}}",
+        "Name": "{{user `AmiImageName`}}",
         "OwnerEmail": "{{user `OwnerEmail`}}",
         "SourceAmiId": "{{ .SourceAMI }}",
         "SourceAmiName": "{{ .SourceAMIName }}"
@@ -65,7 +65,6 @@
   ],
   "variables": {
     "AmiGroups": "all",
-    "ImageName": "{{env `ImageName`}}",
     "InstanceType": "t3.nano",
     "OwnerEmail": "it@sagebase.org",
     "SnapshotGroups": "all",
@@ -74,6 +73,7 @@
     "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
     "aws_profile": "{{env `AWS_PROFILE`}}",
     "aws_region": "{{env `AWS_DEFAULT_REGION`}}",
+    "aws_role_arn": "{{env `AWS_ROLE_ARN`}}",
     "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
     "aws_session_token": "{{env `AWS_SESSION_TOKEN`}}"
   }

@@ -36,6 +36,7 @@ jobs:
     env:
       AWS_ROLE_TO_ASSUME: "arn:aws:iam::867686887310:role/sagebase-github-oidc-packer-image-deploy"
       AWS_REGION: "us-east-1"
+      AMI_IMAGE_NAME: ${{ github.event.repository.name }}-${{ github.ref_name }}
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -53,7 +54,4 @@ jobs:
     - name: Build and Upload AMI
       run: |
         pushd src
-        echo "${{ env.AWS_REGION }}"
-        echo "${{ env.AWS_ROLE_TO_ASSUME }}"
-        echo "${{ github.event.repository.name }}-${{ github.ref_name }}"
-        packer build -force -var AwsRoleArn=${{ env.AWS_ROLE_TO_ASSUME }} -var AwsRegion=${{ env.AWS_REGION }} -var ImageName=${{ github.event.repository.name }}-${{ github.ref_name }} template.json
+        AWS_ROLE_ARN=${{ env.AWS_ROLE_TO_ASSUME }} AWS_DEFAULT_REGION=${{ env.AWS_REGION }} packer build -force -var AmiImageName=${{ env.AMI_IMAGE_NAME }} template.json
