@@ -9,6 +9,7 @@
         update_cache: true
         pkg:
           - "build-essential"
+          - "python3-pip"
 
     - name: Install python packages
       ansible.builtin.pip:

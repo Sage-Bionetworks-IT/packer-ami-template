@@ -45,7 +45,7 @@ Now you will be able to build an image and deploy it to Imagecentral.
 If you would like to test building an AMI run:
 ```
 cd src
-packer build -var AwsProfile=packer-service-imagecentral -var AwsRegion=us-east-1 -var ImageName=my-test-image -var PACKER_LOG=1 template.json
+AWS_PROFILE=packer-service-imagecentral AWS_DEFAULT_REGION=us-east-1 packer build -var ImageName=my-test-image -var PACKER_LOG=1 template.json
 ```
 
 Packer will do the following:
