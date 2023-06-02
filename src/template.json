@@ -21,6 +21,7 @@
       "profile": "{{user `aws_profile`}}",
       "region": "{{user `aws_region`}}",
       "secret_key": "{{user `aws_secret_key`}}",
+      "shutdown_behavior": "terminate",
       "snapshot_groups": "{{user `SnapshotGroups`}}",
       "source_ami_filter": {
         "filters": {
